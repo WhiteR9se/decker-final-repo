@@ -1,0 +1,15 @@
+providers = ["node", "python"]
+
+[variables]
+NIXPACKS_NODE_VERSION = "20"
+NIXPACKS_PYTHON_VERSION = "3.13"
+
+[phases.setup]
+# Explicitly listing all three so FFmpeg doesn't overwrite Node or Python
+nixPkgs = ["nodejs_20", "ffmpeg"]
+
+[phases.build]
+cmds = ["npm install", "pip install -r requirements.txt", "npm run build"]
+
+[start]
+cmd = "node server.js"
